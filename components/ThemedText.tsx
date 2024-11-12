@@ -1,60 +1,45 @@
-import { Text, type TextProps, StyleSheet } from 'react-native';
-
-import { useThemeColor } from '@/hooks/useThemeColor';
+import { StyleSheet, Text, TextProps, View } from "react-native";
+import React from "react";
 
 export type ThemedTextProps = TextProps & {
-  lightColor?: string;
-  darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  weight?: keyof typeof weights;
+  size?: keyof typeof fontSizes;
 };
 
-export function ThemedText({
-  style,
-  lightColor,
-  darkColor,
-  type = 'default',
-  ...rest
-}: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+const weights = {
+  light: "Inter_300Light",
+  base: "Inter_400Regular",
+  bold: "Inter_600SemiBold",
+  black: "Inter_800ExtraBold",
+};
 
+const fontSizes = {
+  extraSmall: 10,
+  small: 12,
+  base: 14,
+  medium: 16,
+  large: 18,
+  extraLarge: 24,
+  jumbo: 32,
+  huge: 40,
+};
+
+const ThemedText = ({
+  weight = "base",
+  size = "base",
+  ...props
+}: ThemedTextProps) => {
   return (
     <Text
+      {...props}
       style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
+        { fontFamily: weights[weight], fontSize: fontSizes[size] },
+        props.style,
       ]}
-      {...rest}
     />
   );
-}
+};
 
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: '600',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    color: '#0a7ea4',
-  },
-});
+export default ThemedText;
+
+const styles = StyleSheet.create({});
