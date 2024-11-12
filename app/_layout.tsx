@@ -19,9 +19,12 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "@/utils/setup-styles";
 import { darkTheme, lightTheme } from "@/constants/themes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -44,10 +47,13 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? darkTheme : lightTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
-      <StatusBar style="auto" />
+      <QueryClientProvider client={queryClient}>
+        <Stack>
+          <Stack.Screen name="(auth)/signin" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

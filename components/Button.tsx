@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import {
   createStyleSheet,
@@ -20,7 +20,7 @@ const Button = ({
   return (
     <TouchableOpacity
       {...props}
-      style={styles.button}
+      style={styles.button(props.disabled)}
       activeOpacity={activeOpacity}
     />
   );
@@ -45,7 +45,7 @@ Button.Label = ButtonLabel;
 export default Button;
 
 const stylesheet = createStyleSheet((theme) => ({
-  button: {
+  button: (disabled = false) => ({
     padding: 16,
     alignItems: "center",
     justifyContent: "center",
@@ -54,15 +54,16 @@ const stylesheet = createStyleSheet((theme) => ({
       variant: {
         primary: {
           backgroundColor: theme.colors.primary,
+          opacity: disabled ? 0.5 : 1,
         },
         secondary: {
           backgroundColor: theme.colors.background,
         },
       },
     },
-  },
+  }),
   label: {
-    color: theme.colors.background,
+    color: theme.colors.primaryForeground,
     fontSize: 14,
   },
 }));

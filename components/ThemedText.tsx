@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TextProps, View } from "react-native";
 import React from "react";
+import { useTheme } from "@react-navigation/native";
 
 export type ThemedTextProps = TextProps & {
   weight?: keyof typeof weights;
@@ -29,11 +30,17 @@ const ThemedText = ({
   size = "base",
   ...props
 }: ThemedTextProps) => {
+  const { colors } = useTheme();
+
   return (
     <Text
       {...props}
       style={[
-        { fontFamily: weights[weight], fontSize: fontSizes[size] },
+        {
+          fontFamily: weights[weight],
+          fontSize: fontSizes[size],
+          color: colors.text,
+        },
         props.style,
       ]}
     />

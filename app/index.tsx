@@ -1,48 +1,24 @@
 import Button from "@/components/Button";
-import ThemedText from "@/components/ThemedText";
-import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import useActiveSession from "@/features/auth/hooks/use-active-session";
+import storage from "@/utils/mmkv";
+import { Redirect } from "expo-router";
+import { Text, View } from "react-native";
 
-const IndexPage = () => {
-  const { styles } = useStyles(stylesheet);
+const HomePage = () => {
+  const session = useActiveSession();
+
+  if (!session) {
+    return <Redirect href={"/(auth)/signin"} />;
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.welcome}>
-        <ThemedText weight="light" size="huge" style={styles.title}>
-          RedApp
-        </ThemedText>
-        <ThemedText weight="base" style={styles.description}>
-          A data-saving app for browsing Reddit
-        </ThemedText>
-      </View>
-      <Button>
-        <Button.Label>Sign in with Reddit</Button.Label>
+    <View>
+      <Text>HomePage</Text>
+      <Button onPress={() => storage.delete("active-session")}>
+        <Button.Label>Sign out</Button.Label>
       </Button>
-    </SafeAreaView>
+    </View>
   );
 };
 
-const stylesheet = createStyleSheet((theme) => ({
-  container: {
-    padding: 16,
-    flex: 1,
-    gap: 16,
-  },
-  welcome: {
-    justifyContent: "center",
-    flex: 1,
-    gap: 4,
-  },
-  title: {
-    textAlign: "center",
-    color: theme.colors.primary,
-  },
-  description: {
-    textAlign: "center",
-    opacity: 0.75,
-  },
-}));
-
-export default IndexPage;
+export default HomePage;
