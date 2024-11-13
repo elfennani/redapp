@@ -1,4 +1,8 @@
+import AppHeader from "@/components/AppHeader";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { darkTheme, lightTheme } from "@/constants/themes";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import "@/utils/setup-styles";
 import {
   Inter_300Light,
   Inter_400Regular,
@@ -6,20 +10,14 @@ import {
   Inter_800ExtraBold,
   useFonts,
 } from "@expo-google-fonts/inter";
-import {
-  DarkTheme,
-  DefaultTheme,
-  Theme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { ThemeProvider } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import "@/utils/setup-styles";
-import { darkTheme, lightTheme } from "@/constants/themes";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TouchableOpacity } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -45,12 +43,24 @@ export default function RootLayout() {
     return null;
   }
 
+  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
+
   return (
-    <ThemeProvider value={colorScheme === "dark" ? darkTheme : lightTheme}>
+    <ThemeProvider value={theme}>
       <QueryClientProvider client={queryClient}>
-        <Stack>
+        <Stack
+          screenOptions={{
+            header: (props) => <AppHeader {...props} />,
+          }}
+        >
           <Stack.Screen name="(auth)/signin" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="index"
+            options={{
+              title: "Home Feed",
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
       </QueryClientProvider>
