@@ -1,5 +1,4 @@
 import AppHeader from "@/components/AppHeader";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { darkTheme, lightTheme } from "@/constants/themes";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import "@/utils/setup-styles";
@@ -17,7 +16,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import { TouchableOpacity } from "react-native";
+import "react-native-gesture-handler";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
