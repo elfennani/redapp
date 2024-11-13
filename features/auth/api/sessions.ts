@@ -35,3 +35,9 @@ export function getSession(id: string): Session | undefined {
     return JSON.parse(data);
   }
 }
+
+export function getActiveSession() {
+  const id = storage.getString("active-session");
+
+  if (id) return getSession(id);
+}

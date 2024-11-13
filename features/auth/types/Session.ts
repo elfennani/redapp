@@ -9,4 +9,5 @@ export interface Session {
     icon?: string;
   };
   token: Token;
+  expiration: number;
 }

@@ -1,9 +1,8 @@
-import Button from "@/components/Button";
 import ThemedText from "@/components/ThemedText";
 import AuthButton from "@/features/auth/components/auth-button";
 import useActiveSession from "@/features/auth/hooks/use-active-session";
 import { Redirect } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
@@ -11,7 +10,6 @@ const IndexPage = () => {
   const { styles } = useStyles(stylesheet);
   const session = useActiveSession();
 
-  console.log(session);
   if (session) {
     return <Redirect href={"/"} />;
   }

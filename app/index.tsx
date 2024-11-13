@@ -1,11 +1,11 @@
-import AppHeader from "@/components/AppHeader";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import IconButton from "@/components/IconButton";
 import ThemedView from "@/components/ThemedView";
 import useActiveSession from "@/features/auth/hooks/use-active-session";
+import AppDrawer from "@/features/home/components/app-drawer";
 import storage from "@/utils/mmkv";
-import { Redirect, Stack, useNavigation } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import { useState } from "react";
 import { Text } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
@@ -23,9 +23,7 @@ const HomePage = () => {
       open={open}
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
-      renderDrawerContent={() => {
-        return <Text>Drawer content</Text>;
-      }}
+      renderDrawerContent={() => <AppDrawer />}
       swipeEnabled
       swipeEdgeWidth={60}
       swipeMinDistance={32}

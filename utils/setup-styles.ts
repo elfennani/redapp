@@ -1,5 +1,6 @@
 import { darkTheme, lightTheme } from "@/constants/themes";
 import { Theme } from "@react-navigation/native";
+import { EdgeInsets } from "react-native-safe-area-context";
 import { UnistylesRegistry } from "react-native-unistyles";
 
 type AppThemes = {
