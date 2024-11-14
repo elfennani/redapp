@@ -1,11 +1,11 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useTheme } from "@react-navigation/native";
+import { ActivityIndicator, StyleSheet } from "react-native";
+import { useStyles } from "react-native-unistyles";
 
 type Props = {};
 
 const ThemedActivityIndicator = (props: Props) => {
-  const theme = useTheme();
+  const { theme } = useStyles();
   return <ActivityIndicator color={theme.colors.primary} size={40} />;
 };
 

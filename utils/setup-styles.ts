@@ -34,6 +34,8 @@ declare module "@react-navigation/native" {
   export function useTheme(): ExtendedTheme;
 }
 
+console.log("first");
+
 UnistylesRegistry.addThemes({
   light: lightTheme,
   dark: darkTheme,

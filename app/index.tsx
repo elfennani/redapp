@@ -1,13 +1,11 @@
-import Button from "@/components/Button";
 import Header from "@/components/Header";
 import IconButton from "@/components/IconButton";
 import ThemedView from "@/components/ThemedView";
 import useActiveSession from "@/features/auth/hooks/use-active-session";
+import FeedListing from "@/features/feed/components/feed-listing";
 import AppDrawer from "@/features/home/components/app-drawer";
-import storage from "@/utils/mmkv";
 import { Redirect, Stack } from "expo-router";
 import { useState } from "react";
-import { Text } from "react-native";
 import { Drawer } from "react-native-drawer-layout";
 
 const HomePage = () => {
@@ -28,8 +26,9 @@ const HomePage = () => {
       swipeEdgeWidth={60}
       swipeMinDistance={32}
       drawerType="slide"
+      drawerStyle={{ backgroundColor: "transparent" }}
     >
-      <ThemedView>
+      <ThemedView style={{ flex: 1 }}>
         <Stack.Screen options={{ header: () => null }} />
         <Header>
           <Header.LeftIcons>
@@ -40,10 +39,7 @@ const HomePage = () => {
             <IconButton name="search" />
           </Header.RightIcons>
         </Header>
-        <Text>HomePage</Text>
-        <Button onPress={() => storage.delete("active-session")}>
-          <Button.Label>Sign out</Button.Label>
-        </Button>
+        <FeedListing />
       </ThemedView>
     </Drawer>
   );

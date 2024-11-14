@@ -88,23 +88,26 @@ Header.Title = HeaderTitle;
 export default Header;
 
 const stylesheet = createStyleSheet((theme) => ({
-  container: (top: number, iconLeft: boolean, iconRight: boolean) => ({
-    backgroundColor: theme.colors.card,
-    paddingHorizontal: 16,
-    paddingLeft: iconLeft ? 8 : 16,
-    paddingRight: iconRight ? 8 : 16,
-    paddingTop: top,
-    alignItems: "center",
-    flexDirection: "row",
-    gap: 8,
-    height: top + 56,
-    borderBottomWidth: theme.dark ? 1 : 0,
-    elevation: theme.dark ? 0 : 2,
-    shadowColor: theme.colors.textMuted,
-    borderBottomColor: theme.colors.border,
-    position: "relative",
-    justifyContent: "space-between",
-  }),
+  container: (top: number, iconLeft: boolean, iconRight: boolean) => {
+    return {
+      backgroundColor: theme.colors.card,
+      paddingHorizontal: 16,
+      paddingLeft: iconLeft ? 8 : 16,
+      paddingRight: iconRight ? 8 : 16,
+      paddingTop: top,
+      alignItems: "center",
+      flexDirection: "row",
+      gap: 8,
+      height: top + 56,
+      borderBottomWidth: theme.dark ? 1 : 0,
+      elevation: theme.dark ? 0 : 2,
+      shadowColor: theme.colors.textMuted,
+      borderBottomColor: theme.colors.border,
+      position: "relative",
+      justifyContent: "space-between",
+      zIndex: 30,
+    };
+  },
   iconsContainer: {
     flexDirection: "row",
     gap: 8,

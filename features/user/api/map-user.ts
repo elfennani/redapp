@@ -8,7 +8,7 @@ export default function mapUser(user: UserResponse): User {
     banner: user.subreddit.banner_img
       ? he.decode(user.subreddit.banner_img)
       : undefined,
-    createdAt: user.created,
+    createdAt: user.created * 1000,
     description: user.subreddit.public_description
       ? he.decode(user.subreddit.public_description)
       : undefined,

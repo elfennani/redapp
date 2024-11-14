@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TextProps, View } from "react-native";
 import React from "react";
-import { useTheme } from "@react-navigation/native";
+import { StyleSheet, Text, TextProps } from "react-native";
+import { useStyles } from "react-native-unistyles";
 
 export type ThemedTextProps = TextProps & {
   weight?: keyof typeof weights;
@@ -30,7 +30,7 @@ const ThemedText = ({
   size = "base",
   ...props
 }: ThemedTextProps) => {
-  const { colors } = useTheme();
+  const { theme } = useStyles();
 
   return (
     <Text
@@ -39,7 +39,7 @@ const ThemedText = ({
         {
           fontFamily: weights[weight],
           fontSize: fontSizes[size],
-          color: colors.text,
+          color: theme.colors.text,
         },
         props.style,
       ]}

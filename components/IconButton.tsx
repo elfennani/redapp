@@ -1,13 +1,11 @@
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React, { ComponentProps } from "react";
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   TouchableOpacityProps,
-  View,
 } from "react-native";
-import React, { ComponentProps } from "react";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useTheme } from "@react-navigation/native";
+import { useStyles } from "react-native-unistyles";
 
 type Props = {
   size?: number;
@@ -22,7 +20,7 @@ const IconButton = ({
   hitSlop = 8,
   ...props
 }: Props) => {
-  const theme = useTheme();
+  const { theme } = useStyles();
   return (
     <TouchableOpacity
       {...props}
